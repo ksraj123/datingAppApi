@@ -1,23 +1,34 @@
 const {Client} = require('pg');
+let client = null;
 
 require('dotenv').config();
 
-const connect = async (dbConfig) => {
-    const client = new Client(dbConfig);
+const dbConfig = {
+    user: "postgres",
+    password: "password",
+    host: "127.0.0.1",
+    port: "5432",
+    database: "dating"
+};
+
+const connect = async () => {
+    client = new Client(dbConfig);
     try{
         await client.connect();
         console.log("Connected to db Successfully!");
     } catch (e) {
         console.log("Error While Connecting To DB");
         console.log(e);
-    } finally {
-        return client;
     }
 }
 
-const queryDb = async (dbClient, query) => {
+const queryDb = async (query, values) => {
     try{
-        const results = await dbClient.query(query);
+        let results = null;
+        if (values)
+            results = await client.query(query, values);
+        else
+            results = await client.query(query);
         return results;
     } catch (e) {
         console.log("Error Occured while Querying!")
@@ -25,7 +36,16 @@ const queryDb = async (dbClient, query) => {
     }
 }
 
+const closeDb = async () => {
+    try{
+        await client.end();
+    } catch (e) {
+        console.log(e);
+    }
+}
+
 module.exports.queryDb = queryDb;
+module.exports.closeDb = closeDb;
 module.exports.connectToDb = connect;
 
 /*

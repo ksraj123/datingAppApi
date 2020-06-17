@@ -1,6 +1,6 @@
-const {authRouter, initAuthGlobals} = require('./routes/auth');
-const {userRouter, initUserGlobals} = require('./routes/userRoutes');
+const {userRouter} = require('./routes/userRoutes');
 const {connectToDb} = require('./dbOperations');
+const {authRouter} = require('./routes/auth');
 const port = process.env.PORT || 3000;
 const express = require('express');
 const app = express();
@@ -9,23 +9,9 @@ let connections = [];
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
-let dbClient = null;
 require('dotenv').config();
 
-const dbConfig = {
-    user: "postgres",
-    password: "password",
-    host: "127.0.0.1",
-    port: "5432",
-    database: "dating"
-};
-
-const initiliazieDbClient = async()=>{
-    dbClient = await connectToDb(dbConfig);
-    initAuthGlobals(dbClient);
-    initUserGlobals(dbClient);
-}
-initiliazieDbClient();
+connectToDb();
 
 // Middleware
 app.use(express.json());
