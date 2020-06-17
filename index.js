@@ -1,7 +1,6 @@
-const {userRouter} = require('./routes/userRoutes');
 const {connectToDb} = require('./dbOperations');
-const {authRouter} = require('./routes/auth');
 const port = process.env.PORT || 3000;
+const apiRouter = require('./routes');
 const {setIO} = require('./sockets');
 const express = require('express');
 const app = express();
@@ -18,8 +17,7 @@ connectToDb();
 app.use(express.json());
 
 // Route Middlewares
-app.use('/api/auth', authRouter);
-app.use('/api/user', userRouter);
+app.use('/api/user', apiRouter);
 
 app.get('/', (req, res) => {
     res.send(process.env.SECRET_KEY);

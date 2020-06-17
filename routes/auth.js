@@ -1,13 +1,11 @@
-const {regFromValidation} = require('../validation');
 const {queryDb} = require('../dbOperations');
-const router = require('express').Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const axios = require('axios');
-const tableName = "users";
 require('dotenv').config();
+const tableName = "users";
 
-router.post('/register', regFromValidation, async (req, res, next)=>{
+module.exports.register = async (req, res)=>{
     try{
         // Email should be unique
         let result = await queryDb(`SELECT email FROM ${tableName} WHERE email='${req.body.email}'`);
@@ -28,9 +26,9 @@ router.post('/register', regFromValidation, async (req, res, next)=>{
     } catch (err) {
         res.status(400).send(err);
     }
-})
+}
 
-router.post('/login', async (req, res, next)=>{
+module.exports.login = async (req, res)=>{
     try{
         let result = await queryDb(`SELECT password FROM ${tableName} WHERE email='${req.body.email}'`); 
         if (result.rowCount === 0)  return res.status(400).send("Email or password incorrect!");
@@ -44,6 +42,4 @@ router.post('/login', async (req, res, next)=>{
     } catch (err) {
         res.status(400).send(err);
     }
-})
-
-module.exports.authRouter = router;
+}
