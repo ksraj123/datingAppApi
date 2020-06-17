@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const axios = require('axios');
 require('dotenv').config();
-const tableName = "users";
+const tableName = process.env.TABLE;
 
 module.exports.register = async (req, res)=>{
     try{

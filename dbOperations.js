@@ -4,11 +4,11 @@ let client = null;
 require('dotenv').config();
 
 const dbConfig = {
-    user: "postgres",
-    password: "password",
-    host: "127.0.0.1",
-    port: "5432",
-    database: "dating"
+    user: process.env.DBUSER,
+    password: process.env.PASSWORD,
+    host: process.env.HOST,
+    port: process.env.DBPORT,
+    database: process.env.DATABASE
 };
 
 const connect = async () => {

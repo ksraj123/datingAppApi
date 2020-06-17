@@ -1,5 +1,6 @@
 const {queryDb} = require('../dbOperations');
-const tableName = "users";
+require('dotenv').config();
+const tableName = process.env.TABLE;
 
 const getNotification = async (req, res)=>{
     try{

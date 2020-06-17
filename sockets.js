@@ -1,12 +1,3 @@
-// on liking - we will send post request to backend and the post request which will contains the details of the user
-// whose image we liked, we will store it in notifications database,
-// we will find the correspoing socket for that user and emit a notification event which the front end will handale
-
-// some client code
-// const socket = io.connect('http://localhost:3000');
-// socket.emit('login', {email: "saurabh"})
-// socket.emit('logout')
-
 let connections = [];
 
 const setIO = (io) => {

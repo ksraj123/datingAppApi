@@ -1,5 +1,6 @@
 const {queryDb} = require('../dbOperations');
-const tableName = "users";
+require('dotenv').config();
+const tableName = process.env.TABLE;
 
 //remove likes by each other on each other's profile when blocked
 // give an obtion to unblock also

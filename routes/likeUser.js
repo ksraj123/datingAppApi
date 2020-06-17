@@ -1,6 +1,7 @@
 const {getConnections} = require('../sockets');
 const {queryDb} = require('../dbOperations');
-const tableName = "users";
+require('dotenv').config();
+const tableName = process.env.TABLE;
 
 module.exports = async (req, res)=>{
     // req.body.email - email of user whose image is liked

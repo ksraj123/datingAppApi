@@ -1,5 +1,6 @@
 const {queryDb} = require('../dbOperations');
-const tableName = "users";
+require('dotenv').config();
+const tableName = process.env.TABLE;
 
 module.exports = async (req, res)=>{
     try{

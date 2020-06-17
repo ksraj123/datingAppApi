@@ -1,6 +1,7 @@
 const {connectToDb, queryDb, closeDb} = require('./dbOperations');
 const axios = require('axios');
-const tableName = "users";
+require('dotenv').config();
+const tableName = process.env.TABLE;
 const numMockUsers = 20;
 
 const mockUserData = async () => {
