@@ -65,6 +65,18 @@ Following are required for testing
 
 - **Step 1**: Start Postgresql, create a database, a table inside it and Provide ncessary environemnt variables, install dependecies with the command `npm install`
 
+Environment Variables (.env file in root in same directory as `package.json`)
+Update the values as required
+
+    DBUSER=postgres
+    PASSWORD=password
+    HOST=127.0.0.1
+    DBPORT=5432,
+    DATABASE=dating
+    TABLE=users
+
+    TOKEN_SECRET=thisissaurabhsbiggestsecret
+
 - **Step 2**: Run the command `npm test` to populate the database with mock data and make required tables and columns then run the command `npm start` to start the web server
 
 - **Step 3**: Create an html file like this on open it in two different tabs
