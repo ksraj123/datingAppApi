@@ -1,5 +1,5 @@
 const {regFromValidation} = require('../validation');
-const {queryDb, dbClient} = require('../dbOperations');
+const {queryDb} = require('../dbOperations');
 const router = require('express').Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
