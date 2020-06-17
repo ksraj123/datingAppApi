@@ -9,31 +9,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.postNotification = exports.getNotification = void 0;
 const dbOperations_1 = require("../dbOperations");
-require('dotenv').config();
+require("dotenv/config");
 const tableName = process.env.TABLE;
-exports.default = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getNotification = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        let result = yield dbOperations_1.queryDb(`select email, name, imageUrl from ${tableName}`, []);
-        result = result.rows;
-        // list of people who have blocked the user
-        let blockedBy = yield dbOperations_1.queryDb(`select blockedBy from ${tableName} where email='${req.user.email}'`, []);
-        blockedBy = blockedBy.rows[0][0];
-        if (blockedBy === null)
-            blockedBy = [];
-        result = result.filter((ele) => blockedBy.indexOf(ele[0]) === -1 && ele[0] !== req.user.email);
-        let notifications = yield dbOperations_1.queryDb(`select notifications from ${tableName} where email='${req.user.email}'`, []);
-        // console.log(notifications.rows[0][0]);
-        notifications = notifications.rows[0][0];
+        let result = yield dbOperations_1.queryDb(`select notifications from ${tableName} where email='${req.user.email}'`, []);
         res.json({
             status: "Success",
             email: req.user.email,
-            result,
-            notificationCount: (notifications) ? notifications.length : 0
+            notifications: (result.rows[0][0]) ? result.rows[0][0] : 0
         });
     }
     catch (err) {
-        console.log(err);
+        res.status(400).send(err);
+    }
+});
+exports.postNotification = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        let result = yield dbOperations_1.queryDb(`update ${tableName} set notifications=NULL where email='${req.user.email}'`, []);
+        res.json({
+            status: "Success",
+            email: req.user.email,
+            msg: "notifications deleted"
+        });
+    }
+    catch (err) {
         res.status(400).send(err);
     }
 });

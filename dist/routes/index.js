@@ -3,14 +3,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// const {getNotification, postNotification} = require('./notification');
+const notification_1 = require("./notification");
 const authenticateUser = require('./helpers/authenticateUser');
 const validation_1 = __importDefault(require("./helpers/validation"));
 const auth_1 = require("./auth");
 const router = require('express').Router();
-// const blockUser = require('./blockUser');
+const blockUser_1 = __importDefault(require("./blockUser"));
 const getUsers_1 = __importDefault(require("./getUsers"));
-// const likeUser = require('./likeUser');
+const likeUser_1 = __importDefault(require("./likeUser"));
 /*
 Routes
 POST    /api/user/login
@@ -23,9 +23,9 @@ DELETE  /api/user/notifications - After viewing notifications, requested by fron
 */
 router.post('/login', auth_1.login);
 router.get('/', authenticateUser, getUsers_1.default);
-// router.put('/', authenticateUser, likeUser);
-// router.delete('/', authenticateUser, blockUser);
+router.put('/', authenticateUser, likeUser_1.default);
+router.delete('/', authenticateUser, blockUser_1.default);
 router.post('/register', validation_1.default, auth_1.register);
-// router.get('/notifications', authenticateUser, getNotification);
-// router.delete('/notifications', authenticateUser, postNotification);
+router.get('/notifications', authenticateUser, notification_1.getNotification);
+router.delete('/notifications', authenticateUser, notification_1.postNotification);
 module.exports = router;

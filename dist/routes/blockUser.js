@@ -10,30 +10,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const dbOperations_1 = require("../dbOperations");
-require('dotenv').config();
+require("dotenv/config");
 const tableName = process.env.TABLE;
+//remove likes by each other on each other's profile when blocked
+// give an obtion to unblock also
 exports.default = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // req.body.email - email of user to be blocked
     try {
-        let result = yield dbOperations_1.queryDb(`select email, name, imageUrl from ${tableName}`, []);
-        result = result.rows;
-        // list of people who have blocked the user
-        let blockedBy = yield dbOperations_1.queryDb(`select blockedBy from ${tableName} where email='${req.user.email}'`, []);
-        blockedBy = blockedBy.rows[0][0];
-        if (blockedBy === null)
-            blockedBy = [];
-        result = result.filter((ele) => blockedBy.indexOf(ele[0]) === -1 && ele[0] !== req.user.email);
-        let notifications = yield dbOperations_1.queryDb(`select notifications from ${tableName} where email='${req.user.email}'`, []);
-        // console.log(notifications.rows[0][0]);
-        notifications = notifications.rows[0][0];
+        console.log(req.user.email);
+        yield dbOperations_1.queryDb(`update ${tableName} set blockedBy=array_cat(blockedBy, ARRAY['${req.user.email}']) where email='${req.body.email}'`, []);
         res.json({
             status: "Success",
-            email: req.user.email,
-            result,
-            notificationCount: (notifications) ? notifications.length : 0
+            email: req.body.email,
+            msg: "blocked"
         });
     }
     catch (err) {
-        console.log(err);
         res.status(400).send(err);
     }
 });

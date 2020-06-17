@@ -14,9 +14,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const dbOperations_1 = require("./dbOperations");
 const axios_1 = __importDefault(require("axios"));
-require('dotenv').config();
+require("dotenv/config");
 const tableName = process.env.TABLE;
-const numMockUsers = 20;
+const numMockUsers = 5;
 const mockUserData = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield dbOperations_1.connectToDb();
@@ -36,10 +36,7 @@ const mockUserData = () => __awaiter(void 0, void 0, void 0, function* () {
                 method: "GET",
                 url: 'https://randomuser.me/api/'
             });
-            console.log("here");
             let res = axiosRes.data.results[0];
-            // console.log(res);
-            // res = res.data.results[0];
             console.log("Fetched Fake User From API");
             const fakeUser = [i, `${res.name.first} ${res.name.last}`, res.email, res.login.sha256, res.picture.large];
             yield dbOperations_1.queryDb(`INSERT INTO ${tableName}(id, name, email, password, imageUrl) VALUES($1, $2, $3, $4, $5)`, fakeUser);

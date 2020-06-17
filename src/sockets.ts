@@ -1,11 +1,11 @@
-let connections = [];
+let connections: Array<any> = [];
 
-const setIO = (io) => {
+export const setIO = (io: any) => {
 
-    io.on('connection', (socket)=>{
+    io.on('connection', (socket: any)=>{
 
         // upon successful login frontend will emit 'login'
-        socket.on('login', (data)=>{
+        socket.on('login', (data: any)=>{
             // socket of logged in users will be saved in connections
             console.log("Login Event Tracked!");
             connections.push({
@@ -35,9 +35,6 @@ const setIO = (io) => {
     })
 }
 
-const getConnections = () => {
+export const getConnections = () => {
     return connections;
 }
-
-module.exports.getConnections = getConnections;
-module.exports.setIO = setIO;

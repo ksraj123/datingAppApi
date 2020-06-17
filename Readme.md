@@ -39,7 +39,7 @@ Upon sucessfully logging out, front end should emit `logout` event with `email` 
 
     socket.emit('logout', {email: "saurabh"})
 
-## Testing
+## Setup and Testing
 
 Following are required for testing
 
@@ -65,6 +65,9 @@ Following are required for testing
     <body>
         <script type="text/javascript">
             const socket = io.connect('http://localhost:3000');
+            socket.on('notification', (data) => {
+                console.log(data.notification);
+            });
         </script>
     </body>
     </html>

@@ -13,19 +13,18 @@ export const register = async (req:Request, res:Response)=>{
         if (result.rows.length !== 0)  return res.status(400).send("Email already registered!");
 
         result = await queryDb(`select * from ${tableName}`, []);
-
         const salt = await bcrypt.genSalt(10);
         const hashPassword = await bcrypt.hash(req.body.password, salt);
-
+        
         // Providing Random image for now
         let imageUrl = await axios({
             method: "GET",
             url: "https://randomuser.me/api/"
         });
         imageUrl = imageUrl.data.results[0].picture.large;
-
+        
         await queryDb(`INSERT INTO ${tableName}(id, name, email, password, imageUrl) VALUES($1, $2, $3, $4, $5)`,
-        [result.rowCount+1, req.body.name, req.body.email, hashPassword, imageUrl])
+        [result.rows.length, req.body.name, req.body.email, hashPassword, imageUrl])
         res.json({
             status: "Success",
             email: req.body.email,

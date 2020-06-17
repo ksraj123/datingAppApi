@@ -23,7 +23,6 @@ exports.register = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         // Email should be unique
         let result = yield dbOperations_1.queryDb(`SELECT email FROM ${tableName} WHERE email='${req.body.email}'`, []);
-        console.log(result);
         if (result.rows.length !== 0)
             return res.status(400).send("Email already registered!");
         result = yield dbOperations_1.queryDb(`select * from ${tableName}`, []);
@@ -35,7 +34,7 @@ exports.register = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             url: "https://randomuser.me/api/"
         });
         imageUrl = imageUrl.data.results[0].picture.large;
-        yield dbOperations_1.queryDb(`INSERT INTO ${tableName}(id, name, email, password, imageUrl) VALUES($1, $2, $3, $4, $5)`, [result.rowCount + 1, req.body.name, req.body.email, hashPassword, imageUrl]);
+        yield dbOperations_1.queryDb(`INSERT INTO ${tableName}(id, name, email, password, imageUrl) VALUES($1, $2, $3, $4, $5)`, [result.rows.length, req.body.name, req.body.email, hashPassword, imageUrl]);
         res.json({
             status: "Success",
             email: req.body.email,
