@@ -49,7 +49,7 @@ Following are required for testing
 
 ### Testing - Steps
 
-- **Step 1**: Start Postgresql, create a database, a table inside it and Provide ncessary environemnt variables
+- **Step 1**: Start Postgresql, create a database, a table inside it and Provide ncessary environemnt variables, install dependecies with the command `npm install`
 
 - **Step 2**: Run the command `npm test` to populate the database with mock data and make required tables and columns then run the command `npm start` to start the web server
 

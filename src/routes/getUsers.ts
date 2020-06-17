@@ -1,6 +1,6 @@
 import {Request, Response} from 'express';
 import {queryDb} from '../dbOperations';
-require('dotenv').config();
+import 'dotenv/config';
 const tableName = process.env.TABLE;
 
 export default async (req:Request, res:Response)=>{

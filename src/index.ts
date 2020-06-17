@@ -1,8 +1,8 @@
-const {connectToDb} = require('./dbOperations');
+import {connectToDb} from './dbOperations';
 const port = process.env.PORT || 3000;
-const apiRouter = require('./routes');
-const {setIO} = require('./sockets');
-const express = require('express');
+import apiRouter from './routes';
+import {setIO} from './sockets';
+import express from 'express';
 const app = express();
 
 const server = require('http').Server(app);

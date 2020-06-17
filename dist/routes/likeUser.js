@@ -21,7 +21,7 @@ exports.default = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (likedBy === null)
             likedBy = [];
         // One user can only like others once
-        if (true /*likedBy.indexOf((req as any).user.email) === -1*/) {
+        if (likedBy.indexOf(req.user.email) === -1) {
             yield dbOperations_1.queryDb(`update ${tableName} set likedBy=array_cat(likedBy, ARRAY['${req.user.email}']) where email='${req.body.email}'`, []);
             const notificationMsg = `${req.user.email} liked your profile`;
             yield dbOperations_1.queryDb(`update ${tableName} set notifications=array_cat(notifications, ARRAY['${notificationMsg}']) where email='${req.body.email}'`, []);

@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const dbOperations_1 = require("../dbOperations");
-require('dotenv').config();
+require("dotenv/config");
 const tableName = process.env.TABLE;
 exports.default = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {

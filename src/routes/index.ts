@@ -1,11 +1,12 @@
 import {getNotification, postNotification} from './notification';
-const authenticateUser = require('./helpers/authenticateUser');
+import authenticateUser from './helpers/authenticateUser';
 import regFromValidation from './helpers/validation';
 import {login, register} from './auth';
-const router = require('express').Router();
 import blockUser from './blockUser';
+import * as express from 'express';
 import getUsers from './getUsers';
 import likeUser from './likeUser';
+const router = express.Router();
 
 /*
 Routes
@@ -26,4 +27,4 @@ router.post('/register', regFromValidation, register);
 router.get('/notifications', authenticateUser, getNotification);
 router.delete('/notifications', authenticateUser, postNotification);
 
-module.exports = router;
+export default router;
