@@ -6,7 +6,6 @@ const router = require('express').Router();
 const blockUser = require('./blockUser');
 const getUsers = require('./getUsers');
 const likeUser = require('./likeUser');
-require('dotenv').config();
 
 /*
 Routes

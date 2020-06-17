@@ -32,9 +32,7 @@ const setIO = (io) => {
             })
             console.log(`Number of Connections ${connections.length}`);
         })
-
     })
-
 }
 
 const getConnections = () => {

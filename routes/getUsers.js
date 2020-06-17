@@ -8,7 +8,6 @@ module.exports = async (req, res)=>{
         result = result.rows;
         // list of people who have blocked the user
         let blockedBy = await queryDb(`select blockedBy from ${tableName} where email='${req.user.email}'`);
-        console.log(req.user.email);
         blockedBy = blockedBy.rows[0].blockedby;
         if (blockedBy === null)
             blockedBy = [];
