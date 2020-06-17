@@ -1,7 +1,7 @@
 # Dating App
 
 - Author: Kumar Saurabh Raj
-- Technologies Used: Javascipt, Web Sockets(Socket.IO), NodeJs, Express
+- Technologies Used: Typescript, Postgresql, Web Sockets(Socket.IO), NodeJs, Express
 
 ## Description of Routes
 
