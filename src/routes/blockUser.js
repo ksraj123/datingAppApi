@@ -7,7 +7,7 @@ const tableName = process.env.TABLE;
 module.exports = async (req, res)=>{
     // req.body.email - email of user to be blocked
     try{
-        await queryDb(`update ${tableName} set blockedBy=array_cat(blockedBy, ARRAY['${req.user.email}']) where email='${req.body.email}'`);
+        await queryDb(`update ${tableName} set blockedBy=array_cat(blockedBy, ARRAY['${req.user.email}']) where email='${req.body.email}'`, []);
         res.json({
             status: "Success",
             email: req.body.email,

@@ -1,20 +1,19 @@
-const {Client} = require('pg');
-let client = null;
+import { Client, Configuration } from 'ts-postgres';
+import 'dotenv/config';
 
-require('dotenv').config();
-
-const dbConfig = {
+const dbConfig: Configuration = {
     user: process.env.DBUSER,
     password: process.env.PASSWORD,
     host: process.env.HOST,
-    port: process.env.DBPORT,
+    port: parseInt(process.env.DBPORT + ""),
     database: process.env.DATABASE
 };
 
-const connect = async () => {
-    client = new Client(dbConfig);
+let client = new Client(dbConfig);
+
+export const connectToDb = async () => {
+    await client.connect();
     try{
-        await client.connect();
         console.log("Connected to db Successfully!");
     } catch (e) {
         console.log("Error While Connecting To DB");
@@ -22,10 +21,10 @@ const connect = async () => {
     }
 }
 
-const queryDb = async (query, values) => {
+export const queryDb = async (query: string, values: Array<any>) => {
     try{
         let results = null;
-        if (values)
+        if (values.length !== 0)
             results = await client.query(query, values);
         else
             results = await client.query(query);
@@ -36,14 +35,10 @@ const queryDb = async (query, values) => {
     }
 }
 
-const closeDb = async () => {
+export const closeDb = async () => {
     try{
         await client.end();
     } catch (e) {
         console.log(e);
     }
 }
-
-module.exports.queryDb = queryDb;
-module.exports.closeDb = closeDb;
-module.exports.connectToDb = connect;

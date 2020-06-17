@@ -1,7 +1,8 @@
-const Joi = require('@hapi/joi');
+import {Request, Response, NextFunction} from 'express';
+import Joi from '@hapi/joi';
 
 // Registeration Validation
-const regFromValidation = (req, res, next) => {
+export default (req:Request, res:Response, next:NextFunction) => {
 
     const schema = Joi.object({
         name: Joi.string()
@@ -24,5 +25,3 @@ const regFromValidation = (req, res, next) => {
         next();
     }
 }
-
-module.exports.regFromValidation = regFromValidation;

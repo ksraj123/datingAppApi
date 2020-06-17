@@ -4,7 +4,7 @@ const tableName = process.env.TABLE;
 
 const getNotification = async (req, res)=>{
     try{
-        let result = await queryDb(`select notifications from ${tableName} where email='${req.user.email}'`);
+        let result = await queryDb(`select notifications from ${tableName} where email='${req.user.email}'`, []);
         res.json({
             status: "Success",
             email: req.user.email,
@@ -17,7 +17,7 @@ const getNotification = async (req, res)=>{
 
 const postNotification = async (req, res)=>{
     try{
-        let result = await queryDb(`update ${tableName} set notifications=NULL where email='${req.user.email}'`);
+        let result = await queryDb(`update ${tableName} set notifications=NULL where email='${req.user.email}'`, []);
         res.json({
             status: "Success",
             email: req.user.email,
