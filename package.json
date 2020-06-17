@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node dbPopulate",
-    "start": "node index",
-    "populate": "ts-node ./src/dbPopulate"
+    "test": "ts-node ./src/dbPopulate",
+    "start": "ts-node ./src/index",
+    "build": "tsc",
   },
   "author": "Kumar Saurabh Raj",
   "license": "ISC",

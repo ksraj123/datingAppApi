@@ -19,6 +19,18 @@ This repo has only the backed for the application, Its designed with some expect
 
 ### Route - Expectations
 
+For registeration route, request body should be the following form
+
+    {
+        "name": "Saurabh",
+        "email": "saurabh@example.com",
+        "password": "superSecretPass"
+    }
+
+The password should be of atleast 6 characters long to pass validation and email should be valid format.
+All Other Routes expect the body to contain the email of the concerned user.
+For example, `/api/user` PUT route expects the body to contain the email of user whoose profile is to be liked
+
 ### Websocket - Expectations
 
 The frontend should open a websocket connection, for example

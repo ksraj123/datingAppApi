@@ -17,10 +17,6 @@ app.use(express.json());
 // Route Middlewares
 app.use('/api/user', apiRouter);
 
-// app.get('/', (req, res) => {
-//     res.send(process.env.SECRET_KEY);
-// })
-
 server.listen(port, () => {
     console.log(`Server is running on port ${port}.`)
 })
