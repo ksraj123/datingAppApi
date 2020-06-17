@@ -21,11 +21,13 @@ This repo has only the backed for the application, Its designed with some expect
 
 For registeration route, request body should be the following form
 
+```json
     {
         "name": "Saurabh",
         "email": "saurabh@example.com",
         "password": "superSecretPass"
     }
+```
 
 The password should be of atleast 6 characters long to pass validation and email should be valid format.
 All Other Routes expect the body to contain the email of the concerned user.
@@ -87,18 +89,22 @@ Following are required for testing
 
 - **Step 4**: Open two tabs of Postman and register two users. To register a user send `POST` request `/api/user/register` with the body as `application/json` of the following format
 
+```json
     {
-        "name": "Saurabh"
+        "name": "Saurabh",
         "email": "Saurabh@example.com",
         "password": "superSecretPassword"
     }
+```
 
 - **Step 5**: Login through the two accounts, Send `POST` requests to `/api/user/login` with the  with the body as `application/json` of the following format
 
+```json
     {
         "email": "Saurabh@example.com",
         "password": "superSecretPassword"
     }
+```
 
 - **Step 6**: Copy the token value recieved from the previous step and send a `GET` request to `/api/user`, add the key `auth-token` to header with copied value as value. You will get a list of users visible to the account as response.
 
@@ -108,9 +114,11 @@ Following are required for testing
 
 - **Step 8**: Send `PUT` request to `/api/user` to like an user with the following body as `application/json` of the following format
 
+```json
     {
         "email": "email here",
         "password": "superSecretPassword"
     }
+```
 
 - **Step 9**: Look for the notification message in the console of the liked user for notification mesasge.
