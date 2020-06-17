@@ -1,6 +1,6 @@
 const {getNotification, postNotification} = require('./notification');
-const authenticateUser = require('../authenticateUser');
-const {regFromValidation} = require('../validation');
+const authenticateUser = require('./helpers/authenticateUser');
+const {regFromValidation} = require('./helpers/validation');
 const {login, register} = require('./auth');
 const router = require('express').Router();
 const blockUser = require('./blockUser');
@@ -21,7 +21,7 @@ DELETE  /api/user/notifications - After viewing notifications, requested by fron
 
 router.post('/login', login);
 router.get('/', authenticateUser, getUsers);
-router.put('/', authenticateUser, likeUser)
+router.put('/', authenticateUser, likeUser);
 router.delete('/', authenticateUser, blockUser);
 router.post('/register', regFromValidation, register);
 router.get('/notifications', authenticateUser, getNotification);

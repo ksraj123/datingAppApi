@@ -47,13 +47,3 @@ const closeDb = async () => {
 module.exports.queryDb = queryDb;
 module.exports.closeDb = closeDb;
 module.exports.connectToDb = connect;
-
-/*
-client.connect()
-.then(()=> console.log("Connected Successfully!"))
-.then(()=>client.query("INSERT INTO users(id, name) VALUES($1, $2)", ["1", "Saurabh"]))
-.then(()=>client.query("select * from users"))
-.then(results => console.table(results.rows))
-.catch(e => console.log(e))
-.finally(() => client.end())
-*/
