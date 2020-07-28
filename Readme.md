@@ -1,4 +1,4 @@
-# Dating App
+# Dating App Api
 
 - Author: Kumar Saurabh Raj
 - Technologies Used: Typescript, Postgresql, Web Sockets(Socket.IO), NodeJs, Express
